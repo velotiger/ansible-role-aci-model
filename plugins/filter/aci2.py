@@ -207,21 +207,25 @@ def superlister(myDict, *myList):
     """Prepare input lists for lister, feed these lists to lister and return
 a single list of the items matching the specifications of the input.
 """
-    inputList = []
-    # The 1st item is a list of dicts: search specification for objects in the
-    # inventory tree.
-    for item in myList[0]:
-        inputList.append([])
-        for key, value in item.items():
-            # Extract object type name.
-            m = rSuper.fullmatch(key)
-            if m:
-                inputList[-1].append('%s=%s' % (m.group(1), value))
-    resultList = []
-    for listItem in inputList:
-        # Append exceeding items so that the lister will output their attribs.
-        listItem.extend(myList[1:])
-        resultList.extend(lister(myDict, *listItem))
+    if myList[0] == []:
+        # Avoid a useless search for an empty input list.
+        resultList = []
+    else:
+        inputList = []
+        # The 1st item is a list of dicts: search specification for objects in the
+        # inventory tree.
+        for item in myList[0]:
+            inputList.append([])
+            for key, value in item.items():
+                # Extract object type name.
+                m = rSuper.fullmatch(key)
+                if m:
+                    inputList[-1].append('%s=%s' % (m.group(1), value))
+        resultList = []
+        for listItem in inputList:
+            # Append exceeding items so that the lister will output their attribs.
+            listItem.extend(myList[1:])
+            resultList.extend(lister(myDict, *listItem))
     return resultList
 
 
