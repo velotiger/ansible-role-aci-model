@@ -324,6 +324,70 @@
                 tnCdpIfPolName: ''
     with_items: '{{ aci_model_data|aci_listify1("access_policy","interface_policy_policy_group_vpc") }}'
 
+  - name: Add interface policy policy group access
+    aci_rest:
+      <<: *aci_login
+      path: /api/node/mo/uni/infra/funcprof/accportgrp-{{ item.access_policy_interface_policy_policy_group_access_name }}.json
+      method: post
+      content:
+        infraAccPortGrp:
+          attributes:
+            descr: ''
+            dn: uni/infra/funcprof/accportgrp-{{ item.access_policy_interface_policy_policy_group_access_name }}
+            name: '{{ item.access_policy_interface_policy_policy_group_access_name }}'
+            ownerKey: ''
+            ownerTag: ''
+          children:
+          - infraRsL2IfPol:
+              attributes:
+                tnL2IfPolName: ''
+          - infraRsHIfPol:
+              attributes:
+                tnFabricHIfPolName: ''
+          - infraRsL2PortSecurityPol:
+              attributes:
+                tnL2PortSecurityPolName: ''
+          - infraRsQosPfcIfPol:
+              attributes:
+                tnQosPfcIfPolName: ''
+          - infraRsMonIfInfraPol:
+              attributes:
+                tnMonInfraPolName: ''
+          - infraRsStpIfPol:
+              attributes:
+                tnStpIfPolName: ''
+          - infraRsQosSdIfPol:
+              attributes:
+                tnQosSdIfPolName: ''
+          - infraRsAttEntP:
+              attributes:
+                tDn: uni/infra/attentp-{{ item.access_policy_interface_policy_policy_group_access_aep }}
+          - infraRsMcpIfPol:
+              attributes:
+                tnMcpIfPolName: ''
+          - infraRsQosDppIfPol:
+              attributes:
+                tnQosDppPolName: ''
+          - infraRsQosIngressDppIfPol:
+              attributes:
+                tnQosDppPolName: ''
+          - infraRsQosEgressDppIfPol:
+              attributes:
+                tnQosDppPolName: ''
+          - infraRsStormctrlIfPol:
+              attributes:
+                tnStormctrlIfPolName: ''
+          - infraRsLldpIfPol:
+              attributes:
+                tnLldpIfPolName: '{{ item.access_policy_interface_policy_policy_group_access_lldp }}'
+          - infraRsFcIfPol:
+              attributes:
+                tnFcIfPolName: ''
+          - infraRsCdpIfPol:
+              attributes:
+                tnCdpIfPolName: ''
+    with_items: '{{ aci_model_data|aci_listify1("access_policy","interface_policy_policy_group_access") }}'
+
   - name: Add VLAN pools
     aci_rest:
       <<: *aci_login
