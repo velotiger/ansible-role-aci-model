@@ -25,7 +25,7 @@ There are two ways you can test this role:
 
 
 ### Install the aci filter plugin
-In order to work with the provided ACI topology, a custom Jinja2 filter (*aci_listify*) is needed.
+In order to work with the provided ACI topology, a custom Jinja2 filter (*aci_listify1*) is needed.
 You need to configure your Ansible to find this Jinja2 filter. There are two ways to do this:
 
  1. Configure Ansible so it looks for the custom aci filter plugin:
@@ -37,6 +37,8 @@ You need to configure your Ansible to find this Jinja2 filter. There are two way
  2. Copy the filter plugin (*plugins/filter/aci.py*) into your designated filter plugin directory
 
 Because of its general usefulness, we are looking into making this *aci_listify* filter more generic and make it part of the default Ansible filters.
+This has been done in Ansible collection [Cisco.Aci](https://docs.ansible.com/ansible/devel/collections/cisco/aci/), v2.9.0.
+The filter in this repo has therefore been renamend to (*aci_listify1*) in order to avoid a name clash.
 
 #### The alternative filter plugin
 The alternative filter *aci_listify2* (file: *plugins/filter/aci2.py*) is installed in the same manner as the original filter. It provides the following enhancements:

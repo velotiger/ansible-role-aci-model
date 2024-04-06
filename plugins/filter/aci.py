@@ -61,9 +61,10 @@ Args:
 
 
 class FilterModule(object):
-    ''' Ansible core jinja2 filters '''
+    """Jinja2 filters for Ansible."""
 
     def filters(self):
+        """Filter is named «aci_listify1» to avoid a name clash with «aci_listify» included in collection cisco.aci v2.9.0."""
         return {
-            'aci_listify': listify
+            'aci_listify1': listify
         }
